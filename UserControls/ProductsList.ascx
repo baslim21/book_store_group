@@ -11,7 +11,7 @@
       <tr height="105">
         <td align="center" width="110">
           <a href='Product.aspx?ProductID=<%# Eval("ProductID")%>'>
-            <img width="100" src='ProductImages/<%# Eval("Thumbnail") %>' border="0"/>
+            <img width="100" src='bookImages/<%# Eval("Thumbnail") %>' border="0"/>
           </a>
         </td>
         <td vAlign="top" width="250">

@@ -15,16 +15,16 @@ public partial class CatalogAdmin : System.Web.UI.Page
   {
     // Set the title of the page
     this.Title = BalloonShopConfiguration.SiteName + " : Catalog Admin";
-    // Get DepartmentID from the query string
-    string departmentId = Request.QueryString["DepartmentID"];
+    // Get BookCategoryID from the query string
+    string BookCategoryId = Request.QueryString["BookCategoryID"];
     // Get CategoryID from the query string
     string categoryId = Request.QueryString["CategoryID"];
     // Get ProductID from the query string
     string productId = Request.QueryString["ProductID"];
     // Load the appropriate control into the place holder
-    if (departmentId == null)
+    if (BookCategoryId == null)
     {
-      Control c = Page.LoadControl(Request.ApplicationPath + "/UserControls/DepartmentsAdmin.ascx");
+        Control c = Page.LoadControl(Request.ApplicationPath + "/UserControls/BookCategoryAdmin.ascx");
       adminPlaceHolder.Controls.Add(c);
     }
     else if (categoryId == null)

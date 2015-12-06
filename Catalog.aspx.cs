@@ -23,8 +23,8 @@ public partial class Catalog : System.Web.UI.Page
   // Fill the page with data
   private void PopulateControls()
   {
-    // Retrieve DepartmentID from the query string
-    string departmentId = Request.QueryString["DepartmentID"];
+      // Retrieve BookCategoryID from the query string
+      string BookCategoryId = Request.QueryString["BookCategoryID"];
     // Retrieve CategoryID from the query string
     string categoryId = Request.QueryString["CategoryID"];
     // If browsing a category...
@@ -38,16 +38,16 @@ public partial class Catalog : System.Web.UI.Page
       this.Title = BalloonShopConfiguration.SiteName +
                    " : Category : " + cd.Name;
     }
-    // If browsing a department...
-    else if (departmentId != null)
+    // If browsing a BookCategory...
+    else if (BookCategoryId != null)
     {
-      // Retrieve department details and display them
-      DepartmentDetails dd = CatalogAccess.GetDepartmentDetails(departmentId);
+        // Retrieve BookCategory details and display them
+        BookCategoryDetails dd = CatalogAccess.GetBookCategoryDetails(BookCategoryId);
       catalogTitleLabel.Text = dd.Name;
       catalogDescriptionLabel.Text = dd.Description;
       // Set the title of the page
       this.Title = BalloonShopConfiguration.SiteName +
-                   " : Department : " + dd.Name;
+                   " : BookCategory : " + dd.Name;
     }
   }
 }

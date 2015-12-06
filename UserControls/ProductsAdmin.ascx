@@ -8,7 +8,7 @@
 <asp:GridView ID="grid" runat="server" AutoGenerateColumns="False" DataKeyNames="ProductID"
   Width="100%" OnRowCancelingEdit="grid_RowCancelingEdit" OnRowEditing="grid_RowEditing" OnRowUpdating="grid_RowUpdating">
   <Columns>
-    <asp:ImageField DataImageUrlField="Thumbnail" DataImageUrlFormatString="../ProductImages/{0}"
+    <asp:ImageField DataImageUrlField="Thumbnail" DataImageUrlFormatString="../bookImages/{0}"
       HeaderText="Product Image" ReadOnly="True">
     </asp:ImageField>
     <asp:TemplateField HeaderText="Product Name" SortExpression="Name">
@@ -53,12 +53,12 @@
       </EditItemTemplate>
     </asp:TemplateField>
     <asp:CheckBoxField DataField="PromoDept" HeaderText="Dept. prom." 
-          SortExpression="OnDepartmentPromotion" />
+          SortExpression="OnBookCategoryPromotion" />
     <asp:CheckBoxField DataField="PromoFront" HeaderText="Cat. prom." 
           SortExpression="OnCatalogPromotion" />
     <asp:TemplateField>
       <ItemTemplate>
-        <asp:HyperLink runat="server" Text="Select" NavigateUrl='<%# "../CatalogAdmin.aspx?DepartmentID=" + Request.QueryString["DepartmentID"] + "&amp;CategoryID=" + Request.QueryString["CategoryID"] + "&amp;ProductID=" + Eval("ProductID") %>' ID="HyperLink1">
+        <asp:HyperLink runat="server" Text="Select" NavigateUrl='<%# "../CatalogAdmin.aspx?BookCategoryID=" + Request.QueryString["BookCategoryID"] + "&amp;CategoryID=" + Request.QueryString["CategoryID"] + "&amp;ProductID=" + Eval("ProductID") %>' ID="HyperLink1">
         </asp:HyperLink>
       </ItemTemplate>
     </asp:TemplateField>
@@ -101,7 +101,7 @@
   <tr>
     <td width="150" valign="top">Dept. Promotion:</td>
     <td>
-      <asp:CheckBox ID="newOnDepartmentPromotion" Runat="server" />
+      <asp:CheckBox ID="newOnBookCategoryPromotion" Runat="server" />
     </td>
   </tr>
   <tr>

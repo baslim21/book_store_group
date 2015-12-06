@@ -16,14 +16,14 @@ public partial class CategoriesList : System.Web.UI.UserControl
     // don't reload data during postbacks
     if (!IsPostBack)
     {
-      // Obtain the ID of the selected department
-      string departmentId = Request.QueryString["DepartmentID"];
-      // Continue only if DepartmentID exists in the query string
-      if (departmentId != null)
+        // Obtain the ID of the selected BookCategory
+        string BookCategoryId = Request.QueryString["BookCategoryID"];
+        // Continue only if BookCategoryID exists in the query string
+        if (BookCategoryId != null)
       {
-        // Catalog.GetCategoriesInDepartment returns a DataTable object containing
+          // Catalog.GetCategoriesInBookCategory returns a DataTable object containing
         // category data, which is displayed by the DataList
-        list.DataSource = CatalogAccess.GetCategoriesInDepartment(departmentId);
+          list.DataSource = CatalogAccess.GetCategoriesInBookCategory(BookCategoryId);
         // Needed to bind the data bound controls to the data source
         list.DataBind();
         // Make space for the next control

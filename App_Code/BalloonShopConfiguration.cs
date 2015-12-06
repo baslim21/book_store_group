@@ -23,8 +23,8 @@ public static class BalloonShopConfiguration
   static BalloonShopConfiguration()
   {
     cartPersistDays = Int32.Parse(ConfigurationManager.AppSettings["CartPersistDays"]);
-    dbConnectionString = ConfigurationManager.ConnectionStrings["BalloonShopConnection"].ConnectionString;
-    dbProviderName = ConfigurationManager.ConnectionStrings["BalloonShopConnection"].ProviderName;
+    dbConnectionString = ConfigurationManager.ConnectionStrings["BookShopConnection"].ConnectionString;
+    dbProviderName = ConfigurationManager.ConnectionStrings["BookShopConnection"].ProviderName;
     productsPerPage = Int32.Parse(ConfigurationManager.AppSettings["ProductsPerPage"]);
     productDescriptionLength = Int32.Parse(ConfigurationManager.AppSettings["ProductDescriptionLength"]);
     siteName = ConfigurationManager.AppSettings["SiteName"];

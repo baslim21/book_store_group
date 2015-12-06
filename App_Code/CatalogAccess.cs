@@ -3,9 +3,9 @@ using System.Data;
 using System.Data.Common;
 
 /// <summary>
-/// Wraps department details data
+/// Wraps BookCategory details data
 /// </summary>
-public struct DepartmentDetails
+public struct BookCategoryDetails
 {
   public string Name;
   public string Description;
@@ -16,7 +16,7 @@ public struct DepartmentDetails
 /// </summary>
 public struct CategoryDetails
 {
-  public int DepartmentId;
+    public int BookCategoryId;
   public string Name;
   public string Description;
 }
@@ -31,7 +31,7 @@ public struct ProductDetails
   public decimal Price;
   public string Image1FileName;
   public string Image2FileName;
-  public bool OnDepartmentPromotion;
+  public bool OnBookCategoryPromotion;
   public bool OnCatalogPromotion;
 }
 
@@ -47,40 +47,40 @@ public static class CatalogAccess
     //
   }
 
-  // Retrieve the list of departments 
-  public static DataTable GetDepartments()
+  // Retrieve the list of BookCategory 
+  public static DataTable GetBookCategory()
   {
     // get a configured DbCommand object
     DbCommand comm = GenericDataAccess.CreateCommand();
     // set the stored procedure name
-    comm.CommandText = "CatalogGetDepartments";
+    comm.CommandText = "CatalogGetBookCategory";
     // execute the stored procedure and return the results
     return GenericDataAccess.ExecuteSelectCommand(comm);
   }
 
-  // get department details
-  public static DepartmentDetails GetDepartmentDetails(string departmentId)
+  // get BookCategory details
+  public static BookCategoryDetails GetBookCategoryDetails(string BookCategoryId)
   {
     // get a configured DbCommand object
     DbCommand comm = GenericDataAccess.CreateCommand();
     // set the stored procedure name
-    comm.CommandText = "CatalogGetDepartmentDetails";
+    comm.CommandText = "CatalogGetBookCategoryDetails";
     // create a new parameter
     DbParameter param = comm.CreateParameter();
-    param.ParameterName = "@DepartmentID";
-    param.Value = departmentId;
+    param.ParameterName = "@BookCategoryID";
+    param.Value = BookCategoryId;
     param.DbType = DbType.Int32;
     comm.Parameters.Add(param);
     // execute the stored procedure
     DataTable table = GenericDataAccess.ExecuteSelectCommand(comm);
-    // wrap retrieved data into a DepartmentDetails object
-    DepartmentDetails details = new DepartmentDetails();
+    // wrap retrieved data into a BookCategoryDetails object
+    BookCategoryDetails details = new BookCategoryDetails();
     if (table.Rows.Count > 0)
     {
       details.Name = table.Rows[0]["Name"].ToString();
       details.Description = table.Rows[0]["Description"].ToString();
     }
-    // return department details
+    // return BookCategory details
     return details;
   }
 
@@ -103,11 +103,11 @@ public static class CatalogAccess
     CategoryDetails details = new CategoryDetails();
     if (table.Rows.Count > 0)
     {
-      details.DepartmentId = Int32.Parse(table.Rows[0]["DepartmentID"].ToString());
+        details.BookCategoryId = Int32.Parse(table.Rows[0]["BookCategoryID"].ToString());
       details.Name = table.Rows[0]["Name"].ToString();
       details.Description = table.Rows[0]["Description"].ToString();
     }
-    // return department details
+    // return BookCategory details
     return details;
   }
 
@@ -138,24 +138,24 @@ public static class CatalogAccess
       details.Price = Decimal.Parse(dr["Price"].ToString());
       details.Image1FileName = dr["Thumbnail"].ToString();
       details.Image2FileName = dr["Image"].ToString();
-      details.OnDepartmentPromotion = bool.Parse(dr["PromoDept"].ToString());
+      details.OnBookCategoryPromotion = bool.Parse(dr["PromoDept"].ToString());
       details.OnCatalogPromotion = bool.Parse(dr["PromoFront"].ToString());
     }
-    // return department details
+    // return BookCategory details
     return details;
   }
 
-  // retrieve the list of categories in a department
-  public static DataTable GetCategoriesInDepartment(string departmentId)
+  // retrieve the list of categories in a BookCategory
+  public static DataTable GetCategoriesInBookCategory(string BookCategoryId)
   {
     // get a configured DbCommand object
     DbCommand comm = GenericDataAccess.CreateCommand();
     // set the stored procedure name
-    comm.CommandText = "CatalogGetCategoriesInDepartment";
+    comm.CommandText = "CatalogGetCategoriesInBookCategory";
     // create a new parameter
     DbParameter param = comm.CreateParameter();
-    param.ParameterName = "@DepartmentID";
-    param.Value = departmentId;
+    param.ParameterName = "@BookCategoryID";
+    param.Value = BookCategoryId;
     param.DbType = DbType.Int32;
     comm.Parameters.Add(param);
     // execute the stored procedure
@@ -203,8 +203,8 @@ public static class CatalogAccess
     return table;
   }
 
-  // retrieve the list of products featured for a department
-  public static DataTable GetProductsOnDepartmentPromotion(string departmentId, string pageNumber, out int howManyPages)
+  // retrieve the list of products featured for a BookCategory
+  public static DataTable GetProductsOnBookCategoryPromotion(string BookCategoryId, string pageNumber, out int howManyPages)
   {
     // get a configured DbCommand object
     DbCommand comm = GenericDataAccess.CreateCommand();
@@ -212,8 +212,8 @@ public static class CatalogAccess
     comm.CommandText = "CatalogGetProductsOnDeptPromo";
     // create a new parameter
     DbParameter param = comm.CreateParameter();
-    param.ParameterName = "@DepartmentID";
-    param.Value = departmentId;
+    param.ParameterName = "@BookCategoryID";
+    param.Value = BookCategoryId;
     param.DbType = DbType.Int32;
     comm.Parameters.Add(param);
     // create a new parameter
@@ -366,29 +366,29 @@ public static class CatalogAccess
     return table;
   }
 
-  // Update department details
-  public static bool UpdateDepartment(string id, string name, string description)
+  // Update BookCategory details
+  public static bool UpdateBookCategory(string id, string name, string description)
   {
     // get a configured DbCommand object
     DbCommand comm = GenericDataAccess.CreateCommand();
     // set the stored procedure name
-    comm.CommandText = "CatalogUpdateDepartment";
+    comm.CommandText = "CatalogUpdateBookCategory";
     // create a new parameter
     DbParameter param = comm.CreateParameter();
-    param.ParameterName = "@DepartmentId";
+    param.ParameterName = "@BookCategoryId";
     param.Value = id;
     param.DbType = DbType.Int32;
     comm.Parameters.Add(param);
     // create a new parameter
     param = comm.CreateParameter();
-    param.ParameterName = "@DepartmentName";
+    param.ParameterName = "@BookCategoryName";
     param.Value = name;
     param.DbType = DbType.String;
     param.Size = 50;
     comm.Parameters.Add(param);
     // create a new parameter
     param = comm.CreateParameter();
-    param.ParameterName = "@DepartmentDescription";
+    param.ParameterName = "@BookCategoryDescription";
     param.Value = description;
     param.DbType = DbType.String;
     param.Size = 1000;
@@ -408,21 +408,21 @@ public static class CatalogAccess
     return (result != -1);
   }
 
-  // Delete department
-  public static bool DeleteDepartment(string id)
+  // Delete BookCategory
+  public static bool DeleteBookCategory(string id)
   {
     // get a configured DbCommand object
     DbCommand comm = GenericDataAccess.CreateCommand();
     // set the stored procedure name
-    comm.CommandText = "CatalogDeleteDepartment";
+    comm.CommandText = "CatalogDeleteBookCategory";
     // create a new parameter
     DbParameter param = comm.CreateParameter();
-    param.ParameterName = "@DepartmentId";
+    param.ParameterName = "@BookCategoryId";
     param.Value = id;
     param.DbType = DbType.Int32;
     comm.Parameters.Add(param);
     // execute the stored procedure; an error will be thrown by the
-    // database in case the department has related categories, in which case
+    // database in case the BookCategory has related categories, in which case
     // it is not deleted
     int result = -1;
     try
@@ -437,23 +437,23 @@ public static class CatalogAccess
     return (result != -1);
   }
 
-  // Add a new department
-  public static bool AddDepartment(string name, string description)
+  // Add a new BookCategory
+  public static bool AddBookCategory(string name, string description)
   {
     // get a configured DbCommand object
     DbCommand comm = GenericDataAccess.CreateCommand();
     // set the stored procedure name
-    comm.CommandText = "CatalogAddDepartment";
+    comm.CommandText = "CatalogAddBookCategory";
     // create a new parameter
     DbParameter param = comm.CreateParameter();
-    param.ParameterName = "@DepartmentName";
+    param.ParameterName = "@BookCategoryName";
     param.Value = name;
     param.DbType = DbType.String;
     param.Size = 50;
     comm.Parameters.Add(param);
     // create a new parameter
     param = comm.CreateParameter();
-    param.ParameterName = "@DepartmentDescription";
+    param.ParameterName = "@BookCategoryDescription";
     param.Value = description;
     param.DbType = DbType.String;
     param.Size = 1000;
@@ -474,7 +474,7 @@ public static class CatalogAccess
   }
 
   // Create a new Category
-  public static bool CreateCategory(string departmentId, string name, string description)
+  public static bool CreateCategory(string BookCategoryId, string name, string description)
   {
     // get a configured DbCommand object
     DbCommand comm = GenericDataAccess.CreateCommand();
@@ -482,8 +482,8 @@ public static class CatalogAccess
     comm.CommandText = "CatalogCreateCategory";
     // create a new parameter
     DbParameter param = comm.CreateParameter();
-    param.ParameterName = "@DepartmentID";
-    param.Value = departmentId;
+    param.ParameterName = "@BookCategoryID";
+    param.Value = BookCategoryId;
     param.DbType = DbType.Int32;
     comm.Parameters.Add(param);
     // create a new parameter
@@ -606,7 +606,7 @@ public static class CatalogAccess
   }
 
   // Create a new product
-  public static bool CreateProduct(string categoryId, string name, string description, string price, string image1FileName, string image2FileName, string onDepartmentPromotion, string onCatalogPromotion)
+  public static bool CreateProduct(string categoryId, string name, string description, string price, string image1FileName, string image2FileName, string onBookCategoryPromotion, string onCatalogPromotion)
   {
     // get a configured DbCommand object
     DbCommand comm = GenericDataAccess.CreateCommand();
@@ -653,7 +653,7 @@ public static class CatalogAccess
     // create a new parameter
     param = comm.CreateParameter();
     param.ParameterName = "@PromoDept";
-    param.Value = onDepartmentPromotion;
+    param.Value = onBookCategoryPromotion;
     param.DbType = DbType.Boolean;
     comm.Parameters.Add(param);
     // create a new parameter
@@ -679,7 +679,7 @@ public static class CatalogAccess
   }
 
   // Update an existing product
-  public static bool UpdateProduct(string productId, string name, string description, string price, string image1FileName, string image2FileName, string onDepartmentPromotion, string onCatalogPromotion)
+  public static bool UpdateProduct(string productId, string name, string description, string price, string image1FileName, string image2FileName, string onBookCategoryPromotion, string onCatalogPromotion)
   {
     // get a configured DbCommand object
     DbCommand comm = GenericDataAccess.CreateCommand();
@@ -728,7 +728,7 @@ public static class CatalogAccess
     // create a new parameter
     param = comm.CreateParameter();
     param.ParameterName = "@PromoDept";
-    param.Value = onDepartmentPromotion;
+    param.Value = onBookCategoryPromotion;
     param.DbType = DbType.Boolean;
     comm.Parameters.Add(param);
     // create a new parameter

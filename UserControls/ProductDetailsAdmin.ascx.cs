@@ -11,14 +11,14 @@ using System.Web.UI.HtmlControls;
 
 public partial class ProductDetailsAdmin : System.Web.UI.UserControl
 {
-  // store product, category and department IDs as class members
-  private string currentProductId, currentCategoryId, currentDepartmentId;
+    // store product, category and BookCategory IDs as class members
+    private string currentProductId, currentCategoryId, currentBookCategoryId;
 
   protected void Page_Load(object sender, EventArgs e)
   {
-    // Get DepartmentID, CategoryID, ProductID from the query string 
+      // Get BookCategoryID, CategoryID, ProductID from the query string 
     // and save their values
-    currentDepartmentId = Request.QueryString["DepartmentID"];
+      currentBookCategoryId = Request.QueryString["BookCategoryID"];
     currentCategoryId = Request.QueryString["CategoryID"];
     currentProductId = Request.QueryString["ProductID"];
     // Assign buttons to the combo boxes 
@@ -38,16 +38,16 @@ public partial class ProductDetailsAdmin : System.Web.UI.UserControl
   {
     // Set the "go back to products" link
     goBackLink.NavigateUrl = Request.ApplicationPath +
-        String.Format("/CatalogAdmin.aspx?DepartmentID={0}&CategoryID={1}",
-                        currentDepartmentId, currentCategoryId);
+        String.Format("/CatalogAdmin.aspx?BookCategoryID={0}&CategoryID={1}",
+                        currentBookCategoryId, currentCategoryId);
     // Retrieve product details and category details from database
     ProductDetails productDetails = CatalogAccess.GetProductDetails(currentProductId);
     CategoryDetails categoryDetails = CatalogAccess.GetCategoryDetails(currentCategoryId);
     // Set up labels and images
     productNameLabel.Text = productDetails.Name;
     moveLabel.Text = "Move product from category <b>" + categoryDetails.Name + "</b> to this category: ";
-    image1.ImageUrl = Request.ApplicationPath + "/ProductImages/" + productDetails.Image1FileName;
-    image2.ImageUrl = Request.ApplicationPath + "/ProductImages/" + productDetails.Image2FileName;
+    image1.ImageUrl = Request.ApplicationPath + "/bookImages/" + productDetails.Image1FileName;
+    image2.ImageUrl = Request.ApplicationPath + "/bookImages/" + productDetails.Image2FileName;
     // Clear form
     categoriesLabel.Text = "";
     categoriesListAssign.Items.Clear();
@@ -64,7 +64,7 @@ public partial class ProductDetailsAdmin : System.Web.UI.UserControl
       // add a link to the category admin page
       categoriesLabel.Text += (categoriesLabel.Text == "" ? "" : ", ") +
           "<a href=\"" + Request.ApplicationPath + "/CatalogAdmin.aspx" +
-          "?DepartmentID=" + CatalogAccess.GetCategoryDetails(currentCategoryId).DepartmentId +
+          "?BookCategoryID=" + CatalogAccess.GetCategoryDetails(currentCategoryId).BookCategoryId +
           "&CategoryID=" + categoryId + "\">" +
           categoryName + "</a>";
       // populate the categoriesListRemove combo box
@@ -120,7 +120,7 @@ public partial class ProductDetailsAdmin : System.Web.UI.UserControl
     CatalogAccess.DeleteProduct(currentProductId);
     // Need to go back to the categories page now
     Response.Redirect(Request.ApplicationPath + "/CatalogAdmin.aspx" +
-            "?DepartmentID=" + currentDepartmentId +
+            "?BookCategoryID=" + currentBookCategoryId +
             "&CategoryID=" + currentCategoryId);
   }
 
@@ -159,7 +159,7 @@ public partial class ProductDetailsAdmin : System.Web.UI.UserControl
         statusLabel.Text = "Couldn't move the product to the specified category";
       else
         Response.Redirect(Request.ApplicationPath + "/CatalogAdmin.aspx" +
-              "?DepartmentID=" + currentDepartmentId +
+              "?BookCategoryID=" + currentBookCategoryId +
               "&CategoryID=" + newCategoryId +
               "&ProductID=" + currentProductId);
     }
@@ -176,15 +176,15 @@ public partial class ProductDetailsAdmin : System.Web.UI.UserControl
       try
       {
         string fileName = image1FileUpload.FileName;
-        string location = Server.MapPath("./ProductImages/") + fileName;
+        string location = Server.MapPath("./bookImages/") + fileName;
         // save image to server
         image1FileUpload.SaveAs(location);
         // update database with new product details
         ProductDetails pd = CatalogAccess.GetProductDetails(currentProductId);
-        CatalogAccess.UpdateProduct(currentProductId, pd.Name, pd.Description, pd.Price.ToString(), fileName, pd.Image2FileName, pd.OnDepartmentPromotion.ToString(), pd.OnCatalogPromotion.ToString());
+        CatalogAccess.UpdateProduct(currentProductId, pd.Name, pd.Description, pd.Price.ToString(), fileName, pd.Image2FileName, pd.OnBookCategoryPromotion.ToString(), pd.OnCatalogPromotion.ToString());
         // reload the page 
         Response.Redirect(Request.ApplicationPath + "/CatalogAdmin.aspx" +
-                "?DepartmentID=" + currentDepartmentId +
+                "?BookCategoryID=" + currentBookCategoryId +
                 "&CategoryID=" + currentCategoryId +
                 "&ProductID=" + currentProductId);
       }
@@ -204,15 +204,15 @@ public partial class ProductDetailsAdmin : System.Web.UI.UserControl
       try
       {
         string fileName = image2FileUpload.FileName;
-        string location = Server.MapPath("./ProductImages/") + fileName;
+        string location = Server.MapPath("./bookImages/") + fileName;
         // save image to server
         image2FileUpload.SaveAs(location);
         // update database with new product details
         ProductDetails pd = CatalogAccess.GetProductDetails(currentProductId);
-        CatalogAccess.UpdateProduct(currentProductId, pd.Name, pd.Description, pd.Price.ToString(), pd.Image1FileName, fileName, pd.OnDepartmentPromotion.ToString(), pd.OnCatalogPromotion.ToString());
+        CatalogAccess.UpdateProduct(currentProductId, pd.Name, pd.Description, pd.Price.ToString(), pd.Image1FileName, fileName, pd.OnBookCategoryPromotion.ToString(), pd.OnCatalogPromotion.ToString());
         // reload the page 
         Response.Redirect(Request.ApplicationPath + "/CatalogAdmin.aspx" +
-                "?DepartmentID=" + currentDepartmentId +
+                "?BookCategoryID=" + currentBookCategoryId +
                 "&CategoryID=" + currentCategoryId +
                 "&ProductID=" + currentProductId);
       }

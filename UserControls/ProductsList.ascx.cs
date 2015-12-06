@@ -19,8 +19,8 @@ public partial class ProductsList : System.Web.UI.UserControl
 
   private void PopulateControls()
   {
-    // Retrieve DepartmentID from the query string
-    string departmentId = Request.QueryString["DepartmentID"];
+      // Retrieve BookCategoryID from the query string
+      string BookCategoryId = Request.QueryString["BookCategoryID"];
     // Retrieve CategoryID from the query string
     string categoryId = Request.QueryString["CategoryID"];
     // Retrieve Page from the query string
@@ -46,10 +46,10 @@ public partial class ProductsList : System.Web.UI.UserControl
       list.DataSource = CatalogAccess.GetProductsInCategory(categoryId, page, out howManyPages);
       list.DataBind();
     }
-    else if (departmentId != null)
+    else if (BookCategoryId != null)
     {
-      // Retrieve list of products on department promotion
-      list.DataSource = CatalogAccess.GetProductsOnDepartmentPromotion(departmentId, page, out howManyPages);
+        // Retrieve list of products on BookCategory promotion
+        list.DataSource = CatalogAccess.GetProductsOnBookCategoryPromotion(BookCategoryId, page, out howManyPages);
       list.DataBind();
     }
     else

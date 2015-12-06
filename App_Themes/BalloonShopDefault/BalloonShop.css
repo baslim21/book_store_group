@@ -1,4 +1,4 @@
-.DepartmentListHead
+.BookCategoryListHead
 {
   border-right: #01a647 1px solid;
   border-top: #01a647 1px solid;
@@ -12,7 +12,7 @@
   padding-left: 3px;
   text-align: center;
 }
-.DepartmentListContent
+.BookCategoryListContent
 {
   border-right: #01a647 1px solid;
   border-top: #01a647 1px solid;
@@ -21,7 +21,7 @@
   background-color: #9fe1bb;
   text-align: center;
 }
-a.DepartmentUnselected
+a.BookCategoryUnselected
 {
   font-family: Verdana, Arial;
   font-weight: bold;
@@ -31,12 +31,12 @@ a.DepartmentUnselected
   padding-left: 5px;
   text-decoration: none;
 } 
-a.DepartmentUnselected:hover 
+a.BookCategoryUnselected:hover 
 { 
   padding-left: 5px;
   color: #2e8b57;
 } 
-a.DepartmentSelected
+a.BookCategorySelected
 { 
   font-family: Verdana, Arial;  
   font-weight: bold;

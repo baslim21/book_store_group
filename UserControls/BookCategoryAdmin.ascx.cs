@@ -9,35 +9,26 @@ using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
 
-public partial class CategoriesAdmin : System.Web.UI.UserControl
+public partial class BookCategoryAdmin : System.Web.UI.UserControl
 {
   protected void Page_Load(object sender, EventArgs e)
   {
     // Load the grid only the first time the page is loaded
     if (!Page.IsPostBack)
     {
-      // Load the categories grid
+        // Load the BookCategory grid
       BindGrid();
-      // Get BookCategoryID from the query string
-      string BookCategoryId = Request.QueryString["BookCategoryID"];
-      // Obtain the BookCategory's name
-      BookCategoryDetails dd = CatalogAccess.GetBookCategoryDetails(BookCategoryId);
-      string BookCategoryName = dd.Name;
-      // Set controls' properties
+      // Set control properties
       statusLabel.ForeColor = System.Drawing.Color.Red;
-      locationLabel.Text = "Displaying categories for BookCategory <b> "
-        + BookCategoryName + "</b>";
     }
   }
 
   // Populate the GridView with data
   private void BindGrid()
   {
-      // Get BookCategoryID from the query string
-      string BookCategoryId = Request.QueryString["BookCategoryID"];
-    // Get a DataTable object containing the categories
-      grid.DataSource = CatalogAccess.GetCategoriesInBookCategory(BookCategoryId);
-    // Bind the data grid to the data source
+      // Get a DataTable object containing the catalog BookCategory
+      grid.DataSource = CatalogAccess.GetBookCategory();
+    // Bind the data bound controls to the data source
     grid.DataBind();
   }
 
@@ -66,12 +57,12 @@ public partial class CategoriesAdmin : System.Web.UI.UserControl
   // Update row
   protected void grid_RowUpdating(object sender, GridViewUpdateEventArgs e)
   {
-    // Retrieve updated data
+    // Retrieve updated data 
     string id = grid.DataKeys[e.RowIndex].Value.ToString();
     string name = ((TextBox)grid.Rows[e.RowIndex].Cells[0].Controls[0]).Text;
     string description = ((TextBox)grid.Rows[e.RowIndex].FindControl("descriptionTextBox")).Text;
     // Execute the update command
-    bool success = CatalogAccess.UpdateCategory(id, name, description);
+    bool success = CatalogAccess.UpdateBookCategory(id, name, description);
     // Cancel edit mode
     grid.EditIndex = -1;
     // Display status message
@@ -86,7 +77,7 @@ public partial class CategoriesAdmin : System.Web.UI.UserControl
     // Get the ID of the record to be deleted
     string id = grid.DataKeys[e.RowIndex].Value.ToString();
     // Execute the delete command
-    bool success = CatalogAccess.DeleteCategory(id);
+    bool success = CatalogAccess.DeleteBookCategory(id);
     // Cancel edit mode
     grid.EditIndex = -1;
     // Display status message
@@ -95,22 +86,14 @@ public partial class CategoriesAdmin : System.Web.UI.UserControl
     BindGrid();
   }
 
-  // Create a new category
-  protected void createCategory_Click(object sender, EventArgs e)
+  // Create a new BookCategory
+  protected void createBookCategory_Click(object sender, EventArgs e)
   {
-      // Get BookCategoryID from the query string
-      string BookCategoryId = Request.QueryString["BookCategoryID"];
     // Execute the insert command
-      bool success = CatalogAccess.CreateCategory(BookCategoryId, newName.Text, newDescription.Text);
-    // Display results
+      bool success = CatalogAccess.AddBookCategory(newName.Text, newDescription.Text);
+    // Display status message
     statusLabel.Text = success ? "Insert successful" : "Insert failed";
     // Reload the grid
     BindGrid();
-  }
-
-  // Redirect to the BookCategory's page
-  protected void goBackLink_Click(object sender, EventArgs e)
-  {
-    Response.Redirect(Request.ApplicationPath + "/CatalogAdmin.aspx");
   }
 }

@@ -2,8 +2,8 @@
   Inherits="CategoriesAdmin" %>
 <asp:Label ID="statusLabel" runat="server" CssClass="AdminPageText" Text="Categories Loaded"></asp:Label><br />
 <br />
-<asp:Label ID="locationLabel" runat="server" CssClass="AdminPageText" Text="Displaying categories for department..."></asp:Label>
-<asp:LinkButton ID="goBackLink" runat="server" CssClass="AdminPageText" OnClick="goBackLink_Click">(go back to departments)</asp:LinkButton><br />
+<asp:Label ID="locationLabel" runat="server" CssClass="AdminPageText" Text="Displaying categories for BookCategory..."></asp:Label>
+<asp:LinkButton ID="goBackLink" runat="server" CssClass="AdminPageText" OnClick="goBackLink_Click">(go back to Book Categories)</asp:LinkButton><br />
 <br />
 <asp:GridView ID="grid" runat="server" AutoGenerateColumns="False" DataKeyNames="CategoryID"
   Width="100%" OnRowCancelingEdit="grid_RowCancelingEdit" OnRowDeleting="grid_RowDeleting" OnRowEditing="grid_RowEditing" OnRowUpdating="grid_RowUpdating">
@@ -21,7 +21,7 @@
     </asp:TemplateField>
     <asp:TemplateField>
       <ItemTemplate>
-        <asp:HyperLink runat="server" ID="link" NavigateUrl='<%# "../CatalogAdmin.aspx?DepartmentID=" + Request.QueryString["DepartmentID"] + "&amp;CategoryID=" + Eval("CategoryID")%>'
+        <asp:HyperLink runat="server" ID="link" NavigateUrl='<%# "../CatalogAdmin.aspx?BookCategoryID=" + Request.QueryString["BookCategoryID"] + "&amp;CategoryID=" + Eval("BookCategoryID")%>'
           Text="View Products">
         </asp:HyperLink>
       </ItemTemplate>
@@ -31,7 +31,7 @@
   </Columns>
 </asp:GridView>
 <br />
-<span class="AdminPageText">Create a new category in this department:</span>
+<span class="AdminPageText">Create a new category in this BookCategory:</span>
 <table class="AdminPageText" cellspacing="0">
   <tr>
     <td valign="top" width="100">

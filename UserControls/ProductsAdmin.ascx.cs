@@ -73,10 +73,10 @@ public partial class ProductsAdmin : System.Web.UI.UserControl
     string price = ((TextBox)grid.Rows[e.RowIndex].FindControl("priceTextBox")).Text;
     string image1FileName = ((TextBox)grid.Rows[e.RowIndex].FindControl("image1TextBox")).Text;
     string image2FileName = ((TextBox)grid.Rows[e.RowIndex].FindControl("image2TextBox")).Text;
-    string onDepartmentPromotion = ((CheckBox)grid.Rows[e.RowIndex].Cells[6].Controls[0]).Checked.ToString();
+    string onBookCategoryPromotion = ((CheckBox)grid.Rows[e.RowIndex].Cells[6].Controls[0]).Checked.ToString();
     string onCatalogPromotion = ((CheckBox)grid.Rows[e.RowIndex].Cells[7].Controls[0]).Checked.ToString();
     // Execute the update command
-    bool success = CatalogAccess.UpdateProduct(id, name, description, price, image1FileName, image2FileName, onDepartmentPromotion, onCatalogPromotion);
+    bool success = CatalogAccess.UpdateProduct(id, name, description, price, image1FileName, image2FileName, onBookCategoryPromotion, onCatalogPromotion);
     // Cancel edit mode
     grid.EditIndex = -1;
     // Display status message
@@ -91,7 +91,7 @@ public partial class ProductsAdmin : System.Web.UI.UserControl
     // Get CategoryID from the query string
     string categoryId = Request.QueryString["CategoryID"];
     // Execute the insert command
-    bool success = CatalogAccess.CreateProduct(categoryId, newName.Text, newDescription.Text, newPrice.Text, newImage1FileName.Text, newImage2FileName.Text, newOnDepartmentPromotion.Checked.ToString(), newOnCatalogPromotion.Checked.ToString());
+    bool success = CatalogAccess.CreateProduct(categoryId, newName.Text, newDescription.Text, newPrice.Text, newImage1FileName.Text, newImage2FileName.Text, newOnBookCategoryPromotion.Checked.ToString(), newOnCatalogPromotion.Checked.ToString());
     // Display status message
     statusLabel.Text = success ? "Insert successful" : "Insert failed";
     // Reload the grid
@@ -101,9 +101,9 @@ public partial class ProductsAdmin : System.Web.UI.UserControl
   // Go back to the list of categories
   protected void goBackLink_Click(object sender, EventArgs e)
   {
-    // Get DepartmentID from the query string
-    string departmentId = Request.QueryString["DepartmentID"];
+      // Get BookCategoryID from the query string
+      string BookCategoryId = Request.QueryString["BookCategoryID"];
     // Redirect
-    Response.Redirect(Request.ApplicationPath + "/CatalogAdmin.aspx?DepartmentID=" + departmentId);
+      Response.Redirect(Request.ApplicationPath + "/CatalogAdmin.aspx?BookCategoryID=" + BookCategoryId);
   }
 }

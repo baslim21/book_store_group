@@ -5,7 +5,7 @@
     <asp:HyperLink 
       ID="HyperLink1" 
       Runat="server" 
-      NavigateUrl='<%# "../Catalog.aspx?DepartmentID=" + Request.QueryString["DepartmentID"] + "&CategoryID=" + Eval("CategoryID")  %>'
+      NavigateUrl='<%# "../Catalog.aspx?BookCategoryID=" + Request.QueryString["BookCategoryID"] + "&CategoryID=" + Eval("CategoryID")  %>'
       Text='<%# Eval("Name") %>' 
       ToolTip='<%# Eval("Description") %>' 
       CssClass='<%# Eval("CategoryID").ToString() == Request.QueryString["CategoryID"] ? "CategorySelected" : "CategoryUnselected" %>'>>

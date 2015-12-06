@@ -1,18 +1,18 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "ProjTemplate", "..\", "{59BC52AC-E67F-44EB-A6EA-1C0AD3113CD0}"
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "ProjTemplate", "..\ProjTemplate\", "{59BC52AC-E67F-44EB-A6EA-1C0AD3113CD0}"
 	ProjectSection(WebsiteProperties) = preProject
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
-		Debug.AspNetCompiler.VirtualPath = "/"
-		Debug.AspNetCompiler.PhysicalPath = "..\"
+		Debug.AspNetCompiler.VirtualPath = "/ProjTemplate"
+		Debug.AspNetCompiler.PhysicalPath = "..\ProjTemplate\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\ProjTemplate\"
 		Debug.AspNetCompiler.Updateable = "true"
 		Debug.AspNetCompiler.ForceOverwrite = "true"
 		Debug.AspNetCompiler.FixedNames = "false"
 		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.VirtualPath = "/"
-		Release.AspNetCompiler.PhysicalPath = "..\"
+		Release.AspNetCompiler.VirtualPath = "/ProjTemplate"
+		Release.AspNetCompiler.PhysicalPath = "..\ProjTemplate\"
 		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\ProjTemplate\"
 		Release.AspNetCompiler.Updateable = "true"
 		Release.AspNetCompiler.ForceOverwrite = "true"
