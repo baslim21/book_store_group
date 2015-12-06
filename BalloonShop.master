@@ -15,10 +15,10 @@
   <div class="content">
   <form id="Form1" runat="server">
     <div width="770" border="0" style="height:1000px;">
-            <uc1:Header ID="Header1" runat="server" />
+            <uc1:Header ID="Header" runat="server" />
             <p style="text-align:center"><a href="Default.aspx">Home</a> | <a href="Featured.aspx">Featured Books</a> | <a href="BestSellers.aspx">Best Sellers</a> | <a href="mailto:anemaiil@hotmail.com">Contact Us</a></p>
         <div style="position:relative; left:220px">
-        <asp:ContentPlaceHolder ID="contentPlaceHolder" runat="server">   
+        <asp:ContentPlaceHolder ID="contentPlaceHolder1" runat="server">   
         </asp:ContentPlaceHolder>
         </div>
     </div>
