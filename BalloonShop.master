@@ -34,7 +34,8 @@
           <uc5:UserInfo ID="UserInfo1" runat="server" />
           <br />
           <uc2:BookCategoryList ID="BookCategoryList1" runat="server" />
-          <br />              
+          <br />
+          <uc3:CategoriesList ID="CategoriesList1" runat="server" />              
           <uc4:SearchBox id="SearchBox1" runat="server">
           </uc4:SearchBox>
           <br />

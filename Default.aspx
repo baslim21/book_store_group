@@ -2,7 +2,7 @@
 
 <%@ Register Src="UserControls/ProductsList.ascx" TagName="ProductsList" TagPrefix="uc1" %>
 <asp:Content ID="content" ContentPlaceHolderID="contentPlaceHolder" Runat="server">
-  <span class="CatalogTitle">Welcome to BalloonShop! </span>
+  <span class="CatalogTitle">Welcome to Book Store! </span>
   <br />
   <span class="CatalogDescription">Check out these fantastic categories: </span>
     <br />
