@@ -46,3 +46,7 @@ a.BookCategorySelected
   padding-left: 5px;
   text-decoration: none;
 }
+.content{
+    margin-left:auto;
+    margin-right:auto;
+}
